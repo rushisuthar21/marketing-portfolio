@@ -131,42 +131,34 @@ if(matchMedia('(hover:hover)').matches&&!still){
   })();
 }
 
-// ===== Search rank-climb (hero) =====
+// ===== Ad to lead (hero) =====
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const serp=document.querySelector('.serp');
-if(serp){
-  const Q='best restaurant near me',
-    list=serp.querySelector('.serp-list'),typed=serp.querySelector('.typed'),
-    OTHERS=[['Best Restaurants Near You: Top 10 Picks','guide.example.com › restaurants'],
-      ['Where to Eat Tonight: Local Favourites','eatlocal.example.com'],
-      ['Restaurant Reviews and Ratings','reviews.example.com › dining'],
-      ['Cheap Eats and Hidden Gems Nearby','gems.example.com'],
-      ['Open Now: Restaurants Around You','openmap.example.com'],
-      ['Dinner Ideas and Menus Near Me','menus.example.com'],
-      ['Family-Friendly Restaurants List','families.example.com › eat']],
-    mk=(t,u,you,i)=>{
-      const li=document.createElement('li');
-      li.style.setProperty('--i',i);
-      li.innerHTML=`<div class="r-url">${u}</div><div class="r-title">${t}</div>`+(you?'<b class="rank">#8</b>':'');
-      if(you)li.className='you';
-      list.append(li);return li;
-    },
-    rows=OTHERS.map(([t,u],i)=>mk(t,u,false,i)),
-    you=mk('Your Restaurant: Best Dining Near You','yourrestaurant.com › menu',true,7),
-    rank=you.querySelector('.rank'),
-    place=a=>a.forEach((li,i)=>li.style.setProperty('--p',i)),
-    start=[...rows,you],end=[you,...rows];
+const adf=document.querySelector('.adflow');
+if(adf){
+  const q=s=>adf.querySelector(s),list=q('.crm-list'),cl=q('[data-k=clicks]'),ld=q('[data-k=leads]'),cp=q('[data-k=cpa]'),
+    ADS=[['Google Ads','bestbistro.example.com','Best Italian Dinner Near You: Book Tonight','Fresh pasta, open late. Reserve in 30 seconds.','Table request'],
+      ['Meta Ads','northreno.example.com','Kitchen Renovation: Free On-site Quote','See before and after projects from your area.','Quote request']],
+    NM=['Sara M.','Jon T.','Priya K.','Alex R.','Maya L.','Chris D.'];
+  let clicks=0,leads=0;
+  const cpa=()=>cp.textContent='$'+Math.max(11,19-leads*.7).toFixed(2);
+  const add=(src,what)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="av">${NM[leads%6][0]}</span><div><b>${NM[leads%6]}</b><small>${what} · ${src}</small></div><em>New</em>`;
+    list.prepend(li);while(list.children.length>3)list.lastChild.remove();
+    ld.textContent=leads;cpa();
+  };
   (async()=>{
+    let round=0;
     do{
-      serp.classList.remove('win','show');typed.textContent='';rank.textContent='#8';
-      list.classList.add('noanim');place(start);void list.offsetWidth;list.classList.remove('noanim');
-      if(still){typed.textContent=Q;place(end);rank.textContent='#1';serp.classList.add('show','win');break}
-      await sleep(900);
-      for(const ch of Q){typed.textContent+=ch;await sleep(60)}
-      await sleep(350);serp.classList.add('show');await sleep(2000);
-      place(end);
-      for(let n=8;n>=1;n--){rank.textContent='#'+n;await sleep(190)}
-      serp.classList.add('win');await sleep(4500);
+      if(round%4===0){clicks=0;leads=0;list.innerHTML='';cl.textContent=0;ld.textContent=0;cp.textContent='$0'}
+      const [src,url,t,d,what]=ADS[round++%2];
+      q('.ad-src').textContent=src;q('.ad-url').textContent=url;q('.ad-title').textContent=t;q('.ad-desc').textContent=d;
+      adf.classList.remove('click');
+      if(still){clicks=41;leads=3;cl.textContent=clicks;for(let i=0;i<3;i++){leads=i+1;add(src,what)}break}
+      await sleep(900);adf.classList.add('click');
+      await sleep(1100);clicks+=7+round;cl.textContent=clicks;
+      await sleep(500);leads++;add(src,what);
+      await sleep(3600);
     }while(true);
   })();
 }
