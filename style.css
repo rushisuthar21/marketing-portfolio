@@ -482,3 +482,152 @@ body::after{content:"";position:fixed;inset:0;z-index:60;pointer-events:none;opa
 .svc span{font-size:15px;color:var(--muted);max-width:44ch}.svc a:hover span{color:var(--ink)}
 .svc i{font-style:normal;font-size:30px}
 @media(max-width:700px){.svc a{grid-template-columns:1fr auto;gap:8px}.svc span{grid-column:1/-1;grid-row:2}}
+
+/* ===== Case studies ===== */
+.study-list{display:flex;flex-direction:column;gap:20px}
+.study{background:#fff;border:1px solid rgba(28,47,52,.08);border-radius:28px;padding:34px;transition:transform .4s,box-shadow .4s}
+.study:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(11,30,34,.12)}
+.study-head{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:start;padding-bottom:26px;border-bottom:1px solid rgba(28,47,52,.1)}
+.study-head>*,.study-body>*{min-width:0}
+.study-num{font:800 44px/1 var(--d);letter-spacing:-.04em;background:linear-gradient(135deg,var(--amber),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.study-title h3{font:700 26px/1.15 var(--d);letter-spacing:-.02em;margin:6px 0 0}
+.study-title h4{font-size:13px;color:var(--muted);margin:6px 0 0;font-weight:500}
+.study-badge{display:inline-block;margin-top:12px;font-size:12px;font-weight:600;color:var(--teal);border:1px dashed rgba(45,89,96,.55);border-radius:20px;padding:4px 12px}
+.study-metrics{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.study-metrics div{background:var(--ink);color:#fff;border-radius:18px;padding:14px 18px;min-width:132px;max-width:190px}
+.study-metrics strong{display:block;font:800 26px/1.1 var(--d);letter-spacing:-.03em;background:linear-gradient(135deg,var(--amber),var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.study-metrics span{display:block;margin-top:6px;font-size:12px;line-height:1.3;color:#9fb8b3}
+.study-body{display:grid;grid-template-columns:1fr 1.6fr 1fr;gap:34px;padding-top:26px}
+.study-body h5{font:700 12px var(--d);color:var(--coral);text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
+.study-body p,.study-body li{font-size:14px;color:var(--muted)}
+.study-body ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.study-body li{position:relative;padding-left:20px}
+.study-body li::before{content:"";position:absolute;left:0;top:.7em;width:9px;height:2px;border-radius:2px;background:var(--coral)}
+.study-result{background:var(--paper);border-radius:18px;padding:18px 20px;align-self:start}
+.study-result p{color:var(--text);font-weight:500}
+.study>.exp-tags{margin-top:26px}
+@media(max-width:1000px){
+  .study-head{grid-template-columns:auto 1fr}
+  .study-metrics{grid-column:1/-1;justify-content:flex-start}
+}
+@media(max-width:900px){
+  .study-body{grid-template-columns:1fr;gap:24px}
+}
+@media(max-width:560px){
+  .study{padding:22px;border-radius:22px}
+  .study-head{grid-template-columns:1fr;gap:10px}
+  .study-num{font-size:34px}
+  .study-title h3{font-size:22px}
+  .study-metrics div{flex:1 1 130px;max-width:none}
+  .study-metrics strong{font-size:22px}
+}
+
+/* =====================================================================
+   RESPONSIVE + ALIGNMENT PASS (final overrides, keep at the end of file)
+   ===================================================================== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+main{overflow-x:clip}
+img,video,svg{max-width:100%}
+.container{width:min(1160px,calc(100% - 40px))}
+
+/* --- Headings: let each section title use its full column --- */
+.section-intro h2,.toolkit h2,.contact h2{max-width:none}
+.toolkit h2{font-size:clamp(34px,4vw,56px)}
+.section-intro{align-items:end}
+.section-intro p{max-width:48ch}
+
+/* --- Nav: keep links from crowding between 1100 and 1240px --- */
+@media(min-width:1101px) and (max-width:1240px){.links{gap:18px}.links a{font-size:12.5px}}
+
+/* --- Hero sticker: text fits the ring, and it no longer covers the ad label --- */
+.sticker{width:88px;height:88px;top:0;right:6px}
+.sticker text{letter-spacing:.06em;font-size:11px}
+.sticker b{font-size:20px}
+.hero-visual{padding-top:76px}
+.ad-top{padding-right:4px}
+
+/* --- Experience / dates stay on one line --- */
+.exp-date b{white-space:nowrap}
+
+/* --- Case studies: match the site's bold card style --- */
+.study{border:2px solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);position:relative}
+.study:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--coral)}
+.study-metrics div{border-radius:14px}
+.study-badge{margin-top:12px}
+.study-result{border:1.5px solid var(--ink);border-radius:12px}
+
+/* --- Tablet and below (<= 900px) --- */
+@media(max-width:900px){
+  .hero-visual{width:100%;max-width:560px;justify-self:start;place-items:start;padding-top:70px}
+  .adflow{width:100%}
+  .sticker{right:8px}
+  .impact-card:nth-child(odd),.impact-card:nth-child(even){transform:none}
+  .impact-card{min-height:0}
+  .toolkit h2{font-size:clamp(34px,8vw,48px)}
+  .svc a{padding:22px 6px}
+  .camp-art{justify-content:flex-start}
+}
+@media(min-width:901px){.camp-art{justify-content:flex-end}}
+
+/* --- Phones (<= 560px) --- */
+@media(max-width:560px){
+  .hero-visual{padding-top:62px}
+  .sticker{width:76px;height:76px;right:6px}
+  .sticker b{font-size:17px}
+  .sticker text{font-size:10px}
+
+  /* case studies */
+  .study{box-shadow:4px 4px 0 var(--ink)}
+  .study-head{gap:12px}
+  .study-metrics{margin-top:4px;gap:8px}
+  .study-metrics div{flex:1 1 120px;min-width:0;padding:12px 14px}
+  .study-metrics strong{font-size:20px;white-space:normal;overflow-wrap:anywhere}
+  .study-body{gap:22px;padding-top:22px}
+
+  /* impact */
+  .impact-process span:last-child{grid-column:1/-1}
+
+  /* dashboard cards: label + delta on the left, value + sparkline on the right */
+  .kpi{display:grid;grid-template-columns:1fr auto;grid-template-areas:"lab val" "dlt spk";align-items:center;gap:8px 12px;padding:14px 16px}
+  .kpi small{grid-area:lab;align-self:end}
+  .kpi strong{grid-area:val;margin:0;text-align:right;font-size:30px}
+  .kpi .delta{grid-area:dlt;justify-self:start;align-self:center}
+  .kpi .sp{grid-area:spk;width:110px;height:34px;margin:0;padding:0;justify-self:end}
+
+  /* creative page */
+  .camp{padding:40px 0}
+  .camp-art{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .camp-art .shot{max-width:none;flex:none}
+  .camp-art .shot:only-child{grid-column:1/-1}
+  .camp-art .shot:last-child:nth-child(odd):not(:only-child){grid-column:1/-1;width:calc(50% - 6px);justify-self:center}
+
+  /* contact */
+  .contact h2{font-size:clamp(34px,10.5vw,52px)}
+  .contact-inner>p{font-size:16px}
+  .deck{flex-direction:column;align-items:flex-start}
+  .deck .btn{width:100%;justify-content:center}
+}
+
+/* --- Very small phones (<= 360px) --- */
+@media(max-width:360px){
+  .container{width:calc(100% - 24px)}
+  .hero h1{font-size:32px}
+  .proof{gap:8px}
+  .proof b{font-size:17px}
+  .study,.impact-card,.recommendation,.cert-card,.experience-card{padding:18px}
+  .study-title h3{font-size:20px}
+  .exp-main h3{font-size:22px}
+  .btn{padding:13px 16px}
+}
+
+/* --- Large screens (>= 1600px): a little more room --- */
+@media(min-width:1600px){
+  .container{width:min(1280px,calc(100% - 80px))}
+  .section-intro p{font-size:17px}
+}
+
+/* --- Landscape phones: do not force a tall hero --- */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{min-height:0;padding:40px 0 70px}
+}

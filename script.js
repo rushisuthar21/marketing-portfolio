@@ -58,13 +58,14 @@ const obs=new IntersectionObserver(es=>es.forEach(e=>{
   if(!e.isIntersecting)return;
   e.target.classList.add('visible');
   e.target.querySelectorAll('.impact-card strong').forEach(s=>count(s,200));
+  e.target.querySelectorAll('.study-metrics strong[data-count]').forEach(s=>count(s,200));
   obs.unobserve(e.target);
 }),{threshold:.12});
 $('.reveal').forEach(x=>obs.observe(x));
 $('.impact-card strong').forEach(s=>{s.closest('.reveal')||obs.observe(s)});
 
 // Cursor spotlight on cards
-$('.experience-card,.cert-card,.tool-list>div,.impact-card,.recommendation').forEach(c=>{
+$('.experience-card,.study,.cert-card,.tool-list>div,.impact-card,.recommendation').forEach(c=>{
   c.classList.add('spot');
   c.addEventListener('pointermove',e=>{
     const r=c.getBoundingClientRect();
