@@ -30,7 +30,6 @@ $1('#campaigns').innerHTML=CAMPS.map(([t,c,p,i])=>`<article class="camp"><div cl
 const vid=(n,l,c,x='')=>`<figure class="${c}"><video src="${V(n)}.mp4" poster="${V(n)}.jpg" muted loop playsinline preload="none" ${x} aria-label="${l}"></video><figcaption>${l}</figcaption></figure>`;
 $1('#reel').innerHTML=vid('hacktober','Hacktober Fest, Instagram cut','sq')+vid('ama','Ask Me Anything, Instagram cut','sq')+vid('guild','GDG Guild, Instagram cut','sq')+vid('redbull','Red Bull, product ad concept','wide');
 const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;e.isIntersecting?v.play().catch(()=>{}):v.pause()}),{threshold:.5});
-document.querySelectorAll('#reel video').forEach(v=>io.observe(v));
 
 // ---- IKEA viewer ----
 const IK=[['Home','Hero carousel with category captions, then a welcome message and a contact button.'],
@@ -51,7 +50,9 @@ $1('#ikMain').addEventListener('click',()=>openLB([{src:ikImg.src,alt:ikImg.alt}
 // ---- Prototypes ----
 $1('#protos').innerHTML=[['travel','Travel website','Prototype walkthrough: Tours and Treks tabs, a search bar for destination, dates, members and pick-up, and an International destinations carousel.'],
  ['donut','Donut brand site','Interactive prototype shown in a laptop mockup, with flavour-led screens on matching colour backgrounds (Green Apple shown).']]
- .map(([n,t,c])=>`<figure><video src="${V(n)}.mp4" poster="${V(n)}.jpg" controls playsinline preload="none" aria-label="${t} prototype walkthrough"></video><figcaption><b>${t}</b>${c}</figcaption></figure>`).join('');
+ .map(([n,t,c])=>`<figure><video src="${V(n)}.mp4" poster="${V(n)}.jpg" controls muted loop playsinline preload="none" aria-label="${t} prototype walkthrough"></video><figcaption><b>${t}</b>${c}</figcaption></figure>`).join('');
+
+document.querySelectorAll('#reel video, #protos video').forEach(v=>io.observe(v));
 
 // ---- Lightbox ----
 const lb=$1('#lb'),lbImg=lb.querySelector('img'),lbCap=lb.querySelector('figcaption');
