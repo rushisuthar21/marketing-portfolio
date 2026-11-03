@@ -22,7 +22,13 @@ const CAMPS=[
   [['guild','GDG Guild poster with four QR codes']]],
  ['Speaker series','Arrays, Linked Lists and Generative AI',
   'Three speaker-led talks on one layout: the speaker’s name in the accent colour, then date, time and place with icons, and a QR code in the corner. The accent changes per event so the series is easy to tell apart.',
-  [['dsa-array','Data Structures and Algorithms poster: arrays, June 25'],['dsa-linked','Data Structures and Algorithms poster: linked lists, July 15'],['genai','Generative AI talk poster, August 9']]]
+  [['dsa-array','Data Structures and Algorithms poster: arrays, June 25'],['dsa-linked','Data Structures and Algorithms poster: linked lists, July 15'],['genai','Generative AI talk poster, August 9']]],
+ ['Retro Drinkable Yogurt','Product ad concepts, three flavours',
+  'One layout, three flavours: the bottle sits at an angle in a milk splash, with fruit and leaves floating around it. The background and headline shadow change colour per flavour (strawberry pink, mango orange, blueberry purple), so the range is easy to tell apart. Designed in Canva.',
+  [['retro-strawberry','Retro Drinkable Yogurt strawberry ad, Thick, Creamy and Delicious'],['retro-mango','Retro Drinkable Yogurt mango ad, Thick, Creamy and Delicious'],['retro-blueberry','Retro Drinkable Yogurt blueberry ad, Thick, Creamy and Delicious']]],
+ ['Vita Coco','Product ad concept',
+  'A bright tropical scene for coconut water: two cartons at the centre, palm fronds framing the corners and floating coconuts for movement. A single claim, 100% Pure Coconut, keeps the message quick to read. Designed in Canva.',
+  [['vitacoco','Vita Coco coconut water ad, 100% Pure Coconut']]]
 ];
 $1('#campaigns').innerHTML=CAMPS.map(([t,c,p,i])=>`<article class="camp"><div class="camp-text"><span class="category">${c}</span><h3>${t}</h3><p>${p}</p></div><div class="camp-art">${i.map(([n,a])=>`<button class="shot" data-lb="${P(n)}" data-alt="${a}" aria-label="View full size: ${a}"><img src="${P(n)}" alt="${a}" loading="lazy"></button>`).join('')}</div></article>`).join('');
 
