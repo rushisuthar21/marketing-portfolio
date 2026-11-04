@@ -5,28 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Creative work by Rushi Suthar: event posters, product ads, animated social posts, web prototypes and a store UI.">
 <meta name="theme-color" content="#0b1e22">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/design.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rushi Suthar">
+<meta property="og:title" content="Creative Work — Rushi Suthar">
+<meta property="og:description" content="Event posters, product ads, animated social posts, web prototypes and a store UI. Every piece has one job: get someone to scan, click or show up.">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/design.html">
+<meta property="og:image" content="https://YOUR-DOMAIN.com/assets/og/og-creative.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rushi Suthar creative work: Retro yogurt ads and event posters">
+<meta property="og:locale" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Creative Work — Rushi Suthar">
+<meta name="twitter:description" content="Event posters, product ads, animated social posts, web prototypes and a store UI. Every piece has one job: get someone to scan, click or show up.">
+<meta name="twitter:image" content="https://YOUR-DOMAIN.com/assets/og/og-creative.jpg">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}})()</script>
 <title>Creative Work — Rushi Suthar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip" href="#posters">Skip to content</a>
 <header class="nav-wrap">
   <nav class="nav container">
     <a class="logo" href="index.html"><span>RS</span> Rushi Suthar</a>
-    <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
-    <div class="links">
+    <div class="links" id="site-links">
       <a href="index.html">Home</a>
       <a href="#posters">Posters</a>
       <a href="#motion">Motion</a>
       <a href="#web">Web &amp; UI</a>
       <a href="#contact" class="nav-btn">Let’s talk ↗</a>
     </div>
+    <div class="nav-tools">
+      <button class="theme" type="button" aria-label="Switch to dark theme" aria-pressed="false"><svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></svg><svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7z"/></svg></button>
+      <button class="menu" aria-label="Menu" aria-expanded="false" aria-controls="site-links">☰</button>
+    </div>
   </nav>
 </header>
 
-<main>
+<main id="main">
 <section class="hero-wrap studio"><div class="hero container">
   <div class="hero-copy">
     <div class="eyebrow"><span></span>Creative work</div>
@@ -46,7 +67,7 @@
 </div></section>
 
 <div class="ticker"><div class="ticker-track">
-  <span>EVENT POSTERS</span>✦<span>SOCIAL MOTION</span>✦<span>WEB PROTOTYPES</span>✦<span>BRAND CONSISTENCY</span>✦<span>PRESENTATION DESIGN</span>✦
+  <span>EVENT POSTERS</span>✦<span>SOCIAL MOTION</span>✦<span>WEB PROTOTYPES</span>✦<span>BRAND CONSISTENCY</span>✦
 </div></div>
 
 <section id="posters" class="section container">
@@ -78,7 +99,7 @@
   <div class="ik">
     <div class="frame">
       <div class="dots"><i></i><i></i><i></i><small>IKEA store clone</small></div>
-      <button class="shot" id="ikMain" aria-label="View screen full size"><img src="assets/ikea/1.webp" alt=""></button>
+      <button class="shot" id="ikMain" aria-label="View screen full size"><img src="assets/ikea/1.webp" width="1600" height="730" alt="" decoding="async"></button>
     </div>
     <div class="ik-side">
       <h3>IKEA store clone</h3>
@@ -88,10 +109,6 @@
     </div>
   </div>
   <div class="protos" id="protos"></div>
-  <div class="deck">
-    <div><b>Presentation design</b><span>GDG Fall 2024 Ask Me Anything slide deck (PowerPoint)</span></div>
-    <a class="btn light" href="assets/GDG_F2024_AMA.pptx" download>Download deck ↧</a>
-  </div>
 </section>
 
 <section class="section why">
@@ -99,7 +116,7 @@
   <div class="label">Why it matters for marketing</div>
   <div class="why-grid">
     <div><h3>One action per asset</h3><p>Date, place and a QR code sit in the same spot on every poster, so people never have to hunt for how to join.</p></div>
-    <div><h3>One system, many formats</h3><p>A poster becomes a square animation and a slide deck without losing its look, which keeps a brand recognisable across channels.</p></div>
+    <div><h3>One system, many formats</h3><p>A poster becomes a square animation without losing its look, which keeps a brand recognisable across channels.</p></div>
     <div><h3>Built with the audience in mind</h3><p>A casual Q&amp;A gets doodles and sticky notes. A coding fest gets neon green. The style follows who the event is for.</p></div>
   </div>
 </div>
@@ -128,7 +145,7 @@
 </div>
 
 <footer><div class="container"><span>© 2026 Rushi Suthar</span><span>Built around growth.</span></div></footer>
-<script src="design.js"></script>
-<script src="script.js"></script>
+<script src="design.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>

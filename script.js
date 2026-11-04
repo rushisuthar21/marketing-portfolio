@@ -1,3 +1,4 @@
+(()=>{
 const $=s=>document.querySelectorAll(s),
   menu=document.querySelector('.menu'),links=document.querySelector('.links'),
   still=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -7,6 +8,9 @@ menu?.addEventListener('click',()=>{
   const open=links.classList.toggle('open');
   menu.setAttribute('aria-expanded',open?'true':'false');
 });
+const closeMenu=()=>{links?.classList.remove('open');menu?.setAttribute('aria-expanded','false')};
+addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+document.addEventListener('click',e=>{if(links?.classList.contains('open')&&!e.target.closest('.links,.menu'))closeMenu()});
 $('.links a').forEach(a=>a.addEventListener('click',()=>{
   links.classList.remove('open');
   menu?.setAttribute('aria-expanded','false');
@@ -125,11 +129,13 @@ if(matchMedia('(hover:hover)').matches&&!still){
   addEventListener('pointerdown',()=>document.body.classList.add('cur-down'));
   addEventListener('pointerup',()=>document.body.classList.remove('cur-down'));
   document.documentElement.addEventListener('pointerleave',()=>document.body.classList.remove('cur-on'));
-  (function loop(){
+  let running=false;
+  const loop=()=>{
     rx+=(mx-rx)*.16;ry+=(my-ry)*.16;
     ring.style.transform=`translate(${rx}px,${ry}px)`;
-    requestAnimationFrame(loop);
-  })();
+    if(Math.abs(mx-rx)>.3||Math.abs(my-ry)>.3)requestAnimationFrame(loop);else running=false;
+  };
+  addEventListener('pointermove',()=>{if(!running){running=true;requestAnimationFrame(loop)}});
 }
 
 // ===== Ad to lead (hero) =====
@@ -193,3 +199,46 @@ if(dash){
     setInterval(()=>kpis.forEach(k=>tween(k,Math.max(0,k.to+(Math.random()*2-1)*k.j),1400)),3200);
   },{threshold:.3}).observe(dash);
 }
+
+// ===== Dark / light toggle =====
+const themeBtn=document.querySelector('.theme'),root=document.documentElement;
+const paintTheme=()=>{
+  const dark=root.dataset.theme==='dark';
+  themeBtn?.setAttribute('aria-pressed',dark?'true':'false');
+  themeBtn?.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');
+};
+paintTheme();
+themeBtn?.addEventListener('click',()=>{
+  root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';
+  try{localStorage.setItem('theme',root.dataset.theme)}catch(e){}
+  paintTheme();
+});
+// Follow the system setting until the visitor picks a theme themselves
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',e=>{
+  let saved=null;try{saved=localStorage.getItem('theme')}catch(_){}
+  if(!saved){root.dataset.theme=e.matches?'dark':'light';paintTheme()}
+});
+
+// ===== Highlight the nav link for the section in view =====
+const spy=[...document.querySelectorAll('.links a[href^="#"]')]
+  .map(a=>[a,document.querySelector(a.getAttribute('href'))]).filter(([a,t])=>t&&!a.classList.contains('nav-btn'));
+if(spy.length){
+  const spyIO=new IntersectionObserver(es=>es.forEach(e=>{
+    const hit=spy.find(([,t])=>t===e.target);
+    if(hit&&e.isIntersecting)spy.forEach(([a])=>a===hit[0]?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current'));
+  }),{rootMargin:'-45% 0px -50% 0px'});
+  spy.forEach(([,t])=>spyIO.observe(t));
+}
+
+// ===== Headshot: shows up only once assets/headshot.jpg exists =====
+const about=document.getElementById('about');
+if(about){
+  const img=about.querySelector('img'),probe=new Image();
+  probe.onload=()=>{
+    about.hidden=false;
+    const st=document.querySelector('.sticker');
+    if(st){const p=document.createElement('img');p.src=img.src;p.alt='';p.decoding='async';st.append(p);st.classList.add('has-photo')}
+  };
+  probe.src=img.getAttribute('src');
+}
+})();

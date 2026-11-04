@@ -631,3 +631,160 @@ img,video,svg{max-width:100%}
 @media(max-height:500px) and (orientation:landscape){
   .hero{min-height:0;padding:40px 0 70px}
 }
+
+
+/* =====================================================================
+   v2 ADDITIONS (keep at the end of the file)
+   1 theme tokens   2 nav + a11y   3 about / headshot
+   4 flavour-reactive Retro section   5 performance + mobile fixes
+   ===================================================================== */
+
+/* ---------- 1. Theme tokens: light (default) and dark ---------- */
+:root{--bg:#f5f0e6;--card:#fff;--soft:#efe8da;--soft2:#e9e3d6;--hair:rgba(28,47,52,.14);--edge:#0b1e22;--edge-sh:#0b1e22;--dots:rgba(28,47,52,.1);color-scheme:light}
+:root[data-theme=dark]{--bg:#081417;--card:#102529;--soft:#163036;--soft2:#1a363c;--text:#e6efed;--muted:#9fb6b3;--teal:#7cc3cb;--hair:rgba(255,255,255,.13);--edge:rgba(255,255,255,.24);--edge-sh:#2d5960;--dots:rgba(255,255,255,.06);color-scheme:dark}
+
+body{background-color:var(--bg);background-image:radial-gradient(var(--dots) 1px,transparent 1px)}
+.experience-card,.cert-card,.recommendation,.study,.frame{background:var(--card)}
+.experience-card,.cert-card,.recommendation,.study{border-color:var(--edge);box-shadow:6px 6px 0 var(--edge-sh)}
+.experience-card:hover,.cert-card:hover,.recommendation:hover,.study:hover{box-shadow:9px 9px 0 var(--coral)}
+.recommendation.featured{background:var(--ink);border-color:var(--ink);box-shadow:6px 6px 0 var(--amber)}
+.recommendation.featured:hover{box-shadow:9px 9px 0 var(--coral)}
+.exp-tags i,.cert-meta i{border-color:var(--edge);background:var(--card);color:var(--text)}
+.experience-list::before{background:var(--hair)}
+.experience-card::before{background:var(--bg)}
+.exp-date i{background:var(--hair)}
+.study-head,.recommendation-foot,.deck,.camp{border-color:var(--hair)}
+.study-result{background:var(--soft);border-color:var(--edge)}
+.cert-img{background:var(--soft)}
+.svc{border-top-color:var(--edge)}.svc a{border-bottom-color:var(--edge)}
+.svc a:hover{color:var(--ink)}
+.tab{border-color:var(--hair)}.tab:hover{background:var(--soft)}
+.why{background:var(--soft)}
+.shot,.dots{background:var(--soft2)}
+.deck .btn{border-color:var(--hair)}.deck .btn:hover{background:var(--soft)}
+@media(max-width:560px){.study{box-shadow:4px 4px 0 var(--edge-sh)}.study:hover{box-shadow:6px 6px 0 var(--coral)}}
+:root[data-theme=dark] .tab[aria-pressed=true]{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+:root[data-theme=dark] .recommendation.featured{border-color:var(--amber)}
+:root[data-theme=dark] .impact-section{background:linear-gradient(160deg,#2d5960,#17383d)}
+:root[data-theme=dark] .experience-card:hover,:root[data-theme=dark] .cert-card:hover,:root[data-theme=dark] .recommendation:hover,:root[data-theme=dark] .study:hover{box-shadow:9px 9px 0 var(--coral)}
+::selection{background:var(--amber);color:var(--ink)}
+
+/* ---------- 2. Nav tools, skip link, scroll offsets ---------- */
+.nav-tools{display:flex;align-items:center;gap:6px;margin-left:18px}
+.theme{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;transition:background .25s,color .25s,border-color .25s}
+.theme:hover{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+.theme svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme .i-sun{display:none}
+:root[data-theme=dark] .theme .i-sun{display:block}
+:root[data-theme=dark] .theme .i-moon{display:none}
+.menu{width:40px;height:40px;line-height:1}
+.links a[aria-current=true]:not(.nav-btn){color:#fff;box-shadow:0 2px 0 var(--amber)}
+@media(max-width:1100px){.nav-tools{margin-left:0}.links a[aria-current=true]:not(.nav-btn){box-shadow:none;color:var(--amber)}}
+.skip{position:fixed;left:12px;top:-64px;z-index:200;background:var(--amber);color:var(--ink);padding:10px 16px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:top .2s}
+.skip:focus{top:12px}
+section[id],#contact{scroll-margin-top:84px}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
+.toolkit :focus-visible,.contact :focus-visible,.hero-wrap :focus-visible,.nav-wrap :focus-visible,.dark :focus-visible{outline-color:var(--amber)}
+html.lb-open{overflow:hidden}
+
+/* ---------- 3. About + headshot (visible once assets/headshot.jpg exists) ---------- */
+.about{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:center}
+.about[hidden]{display:none}
+.about-photo{width:100%;max-width:400px;justify-self:center}
+.about-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border:2px solid var(--edge);border-radius:16px;box-shadow:10px 10px 0 var(--coral);background:var(--soft2)}
+.about-copy{min-width:0}
+.about-copy h2{font:800 clamp(38px,5vw,64px)/1.03 var(--d);letter-spacing:-.03em;margin:22px 0 18px}
+.about-copy>p{max-width:52ch;color:var(--muted);font-size:17px}
+.about-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.about-facts span{font-size:13px;font-weight:600;padding:6px 13px;border:1.5px solid var(--edge);border-radius:20px}
+.about .actions{margin:28px 0 0}
+.about .light{color:var(--text);border-color:var(--hair)}.about .light:hover{background:var(--soft)}
+.sticker.has-photo b{display:none}
+.sticker img{position:absolute;left:23%;top:23%;width:54%;height:54%;max-width:none;border-radius:50%;object-fit:cover}
+@media(max-width:900px){.about{grid-template-columns:1fr;gap:34px}.about-photo{max-width:300px;justify-self:start}}
+@media(max-width:560px){.about-photo{max-width:240px}.about .actions .btn{width:100%;justify-content:center}}
+
+/* ---------- 4. Flavour-reactive Retro section ---------- */
+.retro{position:relative;isolation:isolate;--gx:70%;--gy:45%}
+.retro-glow{position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);pointer-events:none;-webkit-mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
+.retro-glow i{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;background:radial-gradient(44% 64% at var(--gx) var(--gy),rgba(var(--c),.46),transparent 72%),linear-gradient(rgba(var(--c),.14),rgba(var(--c),.14))}
+:root[data-theme=dark] .retro-glow i{background:radial-gradient(44% 64% at var(--gx) var(--gy),rgba(var(--c),.5),transparent 72%),linear-gradient(rgba(var(--c),.18),rgba(var(--c),.18))}
+.flavors{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:8px;font:600 13px 'Instrument Sans',sans-serif;padding:8px 14px;border-radius:999px;border:1.5px solid var(--hair);background:transparent;color:var(--text);transition:background .3s,border-color .3s}
+.chip i{width:10px;height:10px;border-radius:50%;background:rgb(var(--c))}
+.chip:hover{background:rgba(var(--c),.12)}
+.stage{position:relative;height:280px;margin-top:26px;--px:0;--py:0;max-width:380px}
+.stage img{position:absolute;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.stage .splash{left:50%;bottom:3%;width:96%;height:auto;transform:translateX(-50%);opacity:.9}
+.stage .bt{left:50%;bottom:0;height:86%;width:auto;--ox:0%;--rot:0deg;--s:.94;--oy:0px;--k:7;transform-origin:50% 100%;transform:translate(calc(-50% + var(--ox) + var(--px)*var(--k)*1px),calc(var(--oy) + var(--py)*var(--k)*.5px)) rotate(var(--rot)) scale(var(--s));transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .5s;filter:drop-shadow(0 22px 22px rgba(0,0,0,.28))}
+.stage .bt[data-f=strawberry]{--ox:-64%;--rot:-8deg}
+.stage .bt[data-f=mango]{z-index:2}
+.stage .bt[data-f=blueberry]{--ox:64%;--rot:8deg}
+.stage .fr{opacity:0;--k:15;transform:translate(calc(var(--px)*var(--k)*1px),calc(var(--py)*var(--k)*.7px)) scale(.8);transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .5s;z-index:3;filter:drop-shadow(0 12px 14px rgba(0,0,0,.25))}
+.stage .fr[data-f=strawberry]{right:0;top:0;width:24%}
+.stage .fr[data-f=mango]{right:2%;top:4%;width:19%}
+.stage .fr[data-f=blueberry]{right:0;top:10%;width:30%}
+.retro .shot{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,opacity .35s}
+.retro [data-f=strawberry]{--c:255,93,122}
+.retro[data-active=strawberry] .retro-glow i[data-f=strawberry]{opacity:1}
+.retro[data-active=strawberry] .chip[data-f=strawberry]{border-color:rgb(255,93,122);background:rgba(255,93,122,.16)}
+.retro[data-active=strawberry] .shot[data-f=strawberry]{transform:translateY(-8px) scale(1.03);box-shadow:0 0 0 3px rgba(255,93,122,.95),0 30px 80px -10px rgba(255,93,122,.7)}
+.retro[data-active=strawberry] .shot[data-f]:not([data-f=strawberry]){opacity:.7;transform:scale(.97)}
+.retro[data-active=strawberry] .stage .bt[data-f=strawberry]{--s:1.14;--oy:-10px;--rot:0deg}
+.retro[data-active=strawberry] .stage .bt:not([data-f=strawberry]){opacity:.38;--s:.84}
+.retro[data-active=strawberry] .stage .fr[data-f=strawberry]{opacity:1;transform:translate(calc(var(--px)*var(--k)*1px),calc(var(--py)*var(--k)*.7px)) scale(1)}
+.retro [data-f=mango]{--c:255,140,26}
+.retro[data-active=mango] .retro-glow i[data-f=mango]{opacity:1}
+.retro[data-active=mango] .chip[data-f=mango]{border-color:rgb(255,140,26);background:rgba(255,140,26,.16)}
+.retro[data-active=mango] .shot[data-f=mango]{transform:translateY(-8px) scale(1.03);box-shadow:0 0 0 3px rgba(255,140,26,.95),0 30px 80px -10px rgba(255,140,26,.7)}
+.retro[data-active=mango] .shot[data-f]:not([data-f=mango]){opacity:.7;transform:scale(.97)}
+.retro[data-active=mango] .stage .bt[data-f=mango]{--s:1.14;--oy:-10px;--rot:0deg}
+.retro[data-active=mango] .stage .bt:not([data-f=mango]){opacity:.38;--s:.84}
+.retro[data-active=mango] .stage .fr[data-f=mango]{opacity:1;transform:translate(calc(var(--px)*var(--k)*1px),calc(var(--py)*var(--k)*.7px)) scale(1)}
+.retro [data-f=blueberry]{--c:124,77,255}
+.retro[data-active=blueberry] .retro-glow i[data-f=blueberry]{opacity:1}
+.retro[data-active=blueberry] .chip[data-f=blueberry]{border-color:rgb(124,77,255);background:rgba(124,77,255,.16)}
+.retro[data-active=blueberry] .shot[data-f=blueberry]{transform:translateY(-8px) scale(1.03);box-shadow:0 0 0 3px rgba(124,77,255,.95),0 30px 80px -10px rgba(124,77,255,.7)}
+.retro[data-active=blueberry] .shot[data-f]:not([data-f=blueberry]){opacity:.7;transform:scale(.97)}
+.retro[data-active=blueberry] .stage .bt[data-f=blueberry]{--s:1.14;--oy:-10px;--rot:0deg}
+.retro[data-active=blueberry] .stage .bt:not([data-f=blueberry]){opacity:.38;--s:.84}
+.retro[data-active=blueberry] .stage .fr[data-f=blueberry]{opacity:1;transform:translate(calc(var(--px)*var(--k)*1px),calc(var(--py)*var(--k)*.7px)) scale(1)}
+@media(max-width:900px){.stage{height:250px;margin-inline:auto}.stage .fr[data-f=blueberry]{width:26%}.retro .flavors{justify-content:flex-start}}
+@media(max-height:760px) and (min-width:901px){.stage{display:none}}
+.retro .shot:hover{transform:translateY(-4px)}
+
+/* ---------- 5. Performance + mobile fixes ---------- */
+/* Heavy full-screen effects off on phones and touch devices */
+@media(max-width:900px),(pointer:coarse){
+  body::after{display:none}
+  .contact::before{animation:none;width:420px;height:420px;margin:-210px;filter:blur(70px)}
+}
+/* IKEA screenshots differ by a few pixels in height: reserve one size so tabs do not jump */
+.frame .shot img{aspect-ratio:1600/730;object-fit:cover;height:auto}
+/* Videos never exceed their column */
+.reel video,.protos video{height:auto;max-width:100%}
+/* Phones */
+@media(max-width:560px){
+  .nav{height:64px}.links{top:64px}
+  .logo{font-size:16px}
+  .lb{padding:12px}
+  .lb img{max-width:94vw}
+  .flavors .chip{flex:1 1 auto;justify-content:center}
+  .teaser-cta .btn{width:100%;justify-content:center}
+  .ik-tabs{gap:6px}.tab{padding:8px 13px}
+  footer .container{text-align:center;align-items:center}
+}
+/* Tap targets */
+@media(pointer:coarse){.btn,.chip,.tab,.contact-actions a{min-height:44px;align-items:center}}
+
+/* ---------- Fix: images keep their natural ratio (width/height attributes only reserve space) ---------- */
+img{height:auto}
+.fan img{height:auto}
+.stage .fr,.stage .splash{height:auto}
+.stage .bt{height:86%}
+.cert-img{height:128px}
+@media(max-width:560px){.cert-img{height:auto}}
+
+/* Headshot framing: keep the face in view when cropped */
+.about-photo img{object-position:50% 22%}
+.sticker img{object-position:50% 25%}
